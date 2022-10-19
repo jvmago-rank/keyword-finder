@@ -1,0 +1,5 @@
+google-play-scraper
+scikit-learn
+pandas
+streamlit
+nltk
