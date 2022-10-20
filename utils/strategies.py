@@ -59,7 +59,7 @@ class French(Strategy):
 class Germany(Strategy):
     def stopwords(self):
         stopwords = []
-        file = open('utils/stopwords/germany.txt', encoding='utf-8')
+        file = open('utils/stopwords/german.txt', encoding='utf-8')
         lines = file.readlines()
         for stopword in lines:
             stopwords.append(str(stopword).strip())

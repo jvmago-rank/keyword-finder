@@ -4,6 +4,7 @@ from PIL import Image
 from google_play_scraper import app
 from utils import keyword_finder as kf
 from utils import list_strategies as ls
+from utils import auto_match_language as aml
 
 all_strategies = ls.all_strategies
 
@@ -18,12 +19,17 @@ st.write('''Esta aplicação tem como objetivo encontrar possíveis Keywords e s
 
 longa = st.text_area('Insira um texto:', value="")
 
-idioma = st.selectbox(
-		'Idioma do texto acima:',
-		('','Português','Inglês','Espanhol','Francês','Italiano','Alemão')
-	)
 
-if longa != "" and idioma != '':
+
+
+if longa != "" :
+	auto_idioma = aml.auto_match_language(longa)
+	print(auto_idioma)
+	idioma = st.text_input(
+		'Idioma do texto acima:',
+		value = auto_idioma,
+		disabled=True
+	)
 	########## Infos sobre o texto ##########
 	wds = len(longa.split())
 	chrt = len(longa)
