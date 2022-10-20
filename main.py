@@ -3,47 +3,63 @@ from utils import keyword_finder as kf
 from utils import strategies as st
 from google_play_scraper import app
 #%%
-longa = """¡Empieza ya a ganar dinero como conductor! Sé un driver en DiDi Conductor y te garantizamos mínimo $6000 pesos realizando 80 viajes en los primeros 7 días. ¡Descarga ya DiDi Driver!
+longa = """¡Let your dollar travel further with DiDi’s everyday low fares and offers. Download DiDi Rider now to unlock discounts!
 
 
-Convierta su tiempo libre en ganancias como conductor y comienza a manejar para generar ganancias adicionales con viajes seguros y rápidos. ¡Descarga DiDi Conductor ahora!
 
-¡En DiDi tu seguridad no es un mito!
+DiDi is an industry-leading ridesharing platform that offers safe and fast rides. We are available in 28 cities across Australia and New Zealand and 17+ countries, connecting over 600 million riders across Africa, Asia, Latin America & Russia.
 
-Una de las más de 20 funciones de seguridad es la verificación facial para pasajeros. Si un pasajero solicita un conductor o taxi driver por primera vez o está en una zona de riesgo, la app puede pedirle una validación facial antes de confirmar el viaje. Más seguridad para que seas un driver DiDi. Para las conductoras, nuestro programa de apoyo ofrece la opción de transportar sólo otras mujeres.
+DiDi Rider Services
 
-Obtenga ganancias adicionales en su tiempo libre
-Con DiDi, la aplicación de taxi driver y conductores privados, los conductores pueden elegir las mejores horas para conducir viajes seguros y tener ganancias mensuales garantizados.
+Express:
+Quick and affordable rides, up to 2 people. Easy & affordable.
 
-Cuenta con una plataforma sencilla
-Puedes generar ganancias adicionales con más facilidad manejando como un driver. DiDi Conductor es una plataforma de movilidad que facilita el trabajo de los conductores y taxi driver. Reciba llamadas de viajes cercanos y vea sus ganancias en tiempo real en la propia app.
+Max:
+Spacious and affordable rides for groups up to 6 or extra luggage.
 
-Se un conductor privado o taxi driver
-¡Empieza a generar más ganancias cómo uno de nuestros conductores! Si posees un automóvil privado o un driver taxi particular, puedes manejar de manera flexible y aumentar tus ganancias como un dr en el servicio de transporte privado DiDi Conductor y DiDi Taxi!
+Rideshare:
+Match with another traveler in the same direction and split the cost. Up to 40% cheaper than DiDi Express rides.
 
-️ Viajes seguros ️
-DiDi Driver tiene un equipo de seguridad 24/7. Siempre que acepte un viaje, recibirá alertas de zona de peligro, además de tener una línea directa de emergencia para brindar asistencia inmediata en caso de que la necesites.
+Delivery:
+Affordable, on-demand city-wide delivery. Low delivery fares starting from $6.30 for 24/7 on-demand delivery.
 
-DiDi Mujeres Conductoras
-Si eres mujer y quieres ser una conductora asociada, ¡conoce nuestro programa integral de apoyo para mujeres conductoras! Puedes optar por recibir solicitudes de viaje y hacer el transporte solo de otras mujeres, para manejar de forma más segura. Así te queda tranquila para ser una conductora en DiDi Driver, conduciendo más viajes privados y generando ganancias extra.
 
-Requisitos para registro como un driver
-Para registrarte como conductor o taxi driver en la app, necesitas los siguientes documentos:
-Identificación oficial (INE/IFE)
-Licencia de conducir
-Tarjeta de circulación
-Póliza de seguro del auto
-Registro Federal de Contribuyentes (RFC)
-Carta de no antecedentes penales (CNAP)
+Whether you’re heading out with friends or need a ride from the airport, DiDi can get you there safely, at a fraction of the cost. Request a ride with DiDi Rider!
 
-Esta información de registro del driver puede cambiar según las leyes locales.
+Let your dollar travel further with our everyday low fares and exceptional service. Head to the app to enjoy affordable rides by riding with DiDi.
 
-Servicios DiDi
-DiDi Express: ideal para quien tiene un automóvil privado.
-DiDi Taxi: si tienes un taxi, puedes recibir viajes a través de la app para transportar pasajeros que deseen viajar en taxi privado. Es como una aplicación de taxi dentro de la app DiDi.
-DiDi Entrega: en lugar de transporte de pasajeros, transportará paquetes o productos.
+Why choose DiDi Rider?
 
-Consulta https://mexico.didiglobal.com/centro-de-ayuda/ o contacta a través de: help.driver@mx.didiglobal.com o llamando al 800 725 8888."""
+Low Fares Every Day
+
+At DiDi we believe that ridesharing should be an affordable experience for everyone. That’s why we charge less for our service than competing ridesharing services. DiDi fares are consistently lower than other ride-hailing and taxi services, which means you get to save more money to spend on the activities you love.
+
+Request a ride to enjoy affordable rides by riding with DiDi.
+
+Fast & Reliable
+
+We’ve got over 130,000 drivers at your fingertips across Australia & New Zealand, which means you can find a ride fast.
+
+Easily connect to a driver via the DiDi Rider app in seconds, and you’ll have a car at your location in minutes! Request a ride now!
+
+Safety First
+
+Get added peace of mind while you're riding. We’re committed to helping make every ride with DiDi as safe as possible.
+
+All our drivers have undergone extensive background checks, facial verification, vehicle inspections, ongoing monitoring & more. We offer world-leading in-app safety features such as trip check-ins, phone number, and home address anonymization, sharing your trip with trusted contacts, and more.
+
+Award Winning Rideshare
+
+Aussies have rated DiDi the best ridesharing service in Canstar Blue’s 2020 review, giving it five stars over 8 categories, including reliability, customer service, cleanliness, value for money, and more!
+
+Driver Friendly
+
+Our drivers get to keep more of your fare compared to competing for ride-hailing services, which means that by using DiDi you also support the livelihood of local drivers. It’s a win-win choice for both you and your driver.
+
+
+Questions about DiDi Rider Australia or need help with our ridesharing platform? Access to: https://australia.didiglobal.com/rider/help/ or email us help.rider@au.didiglobal.com
+
+Request a ride to enjoy affordable rides. Download DiDi Rider now!"""
 #%%
 keywordfinder = kf.KeywordFinder(
                 long_description=longa,

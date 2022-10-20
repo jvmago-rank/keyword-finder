@@ -18,16 +18,18 @@ st.write('''Esta aplicação tem como objetivo encontrar possíveis Keywords e s
 
 longa = st.text_area('Insira um texto:', value="")
 
-if longa != "":
+idioma = st.selectbox(
+		'Idioma do texto acima:',
+		('','Português','Inglês','Espanhol','Francês','Italiano','Alemão')
+	)
+
+if longa != "" and idioma != '':
 	########## Infos sobre o texto ##########
 	wds = len(longa.split())
 	chrt = len(longa)
 	chrt_s_space = sum(len(x) for x in longa.split())
 
-	idioma = st.selectbox(
-		'Idioma do texto:',
-		('Português','Inglês','Espanhol','Francês','Italiano','Alemão')
-	)
+	
 
 	values = [wds, chrt, chrt_s_space]
 	index = ['Palavras','Caracteres','Caracteres s/ espaço']
@@ -39,11 +41,12 @@ if longa != "":
 	st.subheader('Keywords')
 	st.write('Selecione o tipo de Keywords que deseja visualizar:')
 
-
+	
 	keywordfinder = kf.KeywordFinder(
 				long_description=longa,
 				strategy=all_strategies[idioma]
 	)
+	
 	shortTail = keywordfinder.get_short_tail()
 	headTail = keywordfinder.get_head_tail()
 	longTail = keywordfinder.get_long_tail()
