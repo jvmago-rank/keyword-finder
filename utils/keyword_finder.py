@@ -21,6 +21,8 @@ class KeywordFinder():
         self.strategy = strategy
         self.stopwords = self.strategy.stopwords()
 
+        self.len_words = len(self.long_description.split())
+
         self.head_tail = None
         self.short_tail = None
         self.long_tail = None
@@ -34,6 +36,10 @@ class KeywordFinder():
             headTail = pd.DataFrame(counts.sum(axis=0),columns=co.get_feature_names()).T.sort_values(0,ascending=False)
             headTail.reset_index(inplace=True)
             headTail.columns = ['Keyword', 'Count']
+            headTail['Densidade'] = round(((headTail['Count'] / self.len_words)*100),2)
+            headTail['Densidade'] = headTail['Densidade'].astype(str)
+            headTail['Densidade'] = headTail['Densidade'] + '%'
+
             self.head_tail = headTail
             return self.head_tail
         
@@ -48,6 +54,10 @@ class KeywordFinder():
             shortTail = pd.DataFrame(counts.sum(axis=0),columns=co.get_feature_names()).T.sort_values(0,ascending=False)
             shortTail.reset_index(inplace=True)
             shortTail.columns = ['Keyword', 'Count']
+            shortTail['Densidade'] = round(((shortTail['Count'] / self.len_words)*100),2)
+            shortTail['Densidade'] = shortTail['Densidade'].astype(str)
+            shortTail['Densidade'] = shortTail['Densidade'] + '%'
+            
 
             tmp_short = shortTail["Keyword"].str.split()
             shortTail_clean = shortTail[~(tmp_short.str[0].isin(self.stopwords) | tmp_short.str[-1].isin(self.stopwords))]
@@ -64,6 +74,10 @@ class KeywordFinder():
             longTail = pd.DataFrame(counts.sum(axis=0),columns=co.get_feature_names()).T.sort_values(0,ascending=False).head()
             longTail.reset_index(inplace=True)
             longTail.columns = ['Keyword', 'Count']
+            longTail['Densidade'] = round(((longTail['Count'] / self.len_words)*100),2)
+            longTail['Densidade'] = longTail['Densidade'].astype(str)
+            longTail['Densidade'] = longTail['Densidade'] + '%'
+            
 
             tmp_long = longTail["Keyword"].str.split()
             longTail_clean = longTail[~(tmp_long.str[0].isin(self.stopwords) | tmp_long.str[-1].isin(self.stopwords))]
