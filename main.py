@@ -7,10 +7,11 @@ from gensim.models.doc2vec import Doc2Vec, TaggedDocument
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.metrics.pairwise import euclidean_distances
+from scipy import spatial
 import pandas as pd
 #%%
 text1 = "Amigo é coisa pra se guardar"
-text2 = 'Amigo é coisa pra se guardar'
+text2 = 'Amigo se guarda'
 texts = []
 texts.append(text1)
 texts.append(text2)
@@ -38,7 +39,7 @@ def most_similar(doc_id,similarity_matrix,matrix):
     Cria um one hot encoding dos documentos
 '''
 tagged_data = [TaggedDocument(words=words, tags=[i]) for i, words in enumerate(result)]
-model_d2v = Doc2Vec(vector_size=100,alpha=0.025, min_count=1)
+model_d2v = Doc2Vec(vector_size=300,alpha=0.025, min_count=1, dm=1)
 model_d2v.build_vocab(tagged_data)
 
 
@@ -47,8 +48,8 @@ for epoch in range(100):
     model_d2v.train(tagged_data,
                 total_examples=model_d2v.corpus_count,
                 epochs=model_d2v.epochs)
-    
-document_embeddings=np.zeros((documents_df.shape[0],100))
+        
+document_embeddings=np.zeros((documents_df.shape[0],300))
 
 for i in range(len(document_embeddings)):
     document_embeddings[i]=model_d2v.docvecs[i]
@@ -59,4 +60,6 @@ pairwise_differences=euclidean_distances(document_embeddings)
 
 most_similar(0,pairwise_similarities,'Cosine Similarity')
 most_similar(0,pairwise_differences,'Euclidean Distance')
+
+
 #%%
