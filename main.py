@@ -1,53 +1,62 @@
-from utils import preprocessing as pp
+from utils import text_preprocessing as pp
 from utils import keyword_finder as kf
 from utils import strategies as st
 from utils import auto_match_language as aml
 from google_play_scraper import app
+from gensim.models.doc2vec import Doc2Vec, TaggedDocument
+import numpy as np
+from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.metrics.pairwise import euclidean_distances
+import pandas as pd
 #%%
-longa = """Are you craving sushi, pizza, or a salad? Download DiDi Food now to enjoy our promotions and discount coupons: get up to 50% off on your delivery order!
-
-DiDi is a professional food delivery platform that brings food from restaurants to your door. With more than 10 million orders delivered, we are experts to get you the food you want in minutes.
-
-Have whatever you’re craving delivered in just one tap: pizza, burgers, tacos, burritos, sushi.
-
-Order food from restaurants easily with DiDi! In just 3 simple steps, you can enjoy your favorite delivery without leaving your home:
-
-1. Open the app and choose your delivery address
-2. Choose your favorite restaurants and select dishes from their menu
-3. Choose a payment method to submit the order, and your meal will be promptly delivered to your door by one of our couriers
-
-Very hungry? View restaurants according to the fastest delivery times and get your food as soon as possible.
-
-Very busy? Don't worry! We have a simple delivery ordering and with just a few clicks, you can order, pay and get your food delivered in minutes.
-
-Want to know your order's location? Track your order's entire real-time progress from ordering, to preparation, to delivery. You can even view your courier's location on the map.
-
-At DiDi Food we want you to have the best experience. In case you need help, our support team will be happy to help you 365 days a year.
-
-Have your next meal delivered straight to your door. Enjoy your meal! Download the app now!"""
+text1 = "Amigo é coisa pra se guardar"
+text2 = 'Amigo é coisa pra se guardar'
+texts = []
+texts.append(text1)
+texts.append(text2)
 #%%
-keywordfinder = kf.KeywordFinder(
-                long_description=longa,
-                strategy=st.Portuguese()
-)
-keywordfinder.stopwords
-keywordfinder.get_head_tail()
-keywordfinder.get_short_tail()
-keywordfinder.get_long_tail()
+teste = pp.Preprocessing(texts.copy())
+result = teste.apply_preprocess_pipeline()
 #%%
-keywordfinderenglish = kf.KeywordFinder(
-                long_description=longa,
-                strategy=st.English()
-)
-keywordfinderenglish.get_head_tail()
-keywordfinderenglish.get_short_tail()
-keywordfinderenglish.get_long_tail()
+
+documents_df = pd.DataFrame(texts, columns=['documents'])
+def most_similar(doc_id,similarity_matrix,matrix):
+    print (f'Document: {documents_df.iloc[doc_id]["documents"]}')
+    print ('\n')
+    print ('Similar Documents:')
+    if matrix=='Cosine Similarity':
+        similar_ix=np.argsort(similarity_matrix[doc_id])[::-1]
+    elif matrix=='Euclidean Distance':
+        similar_ix=np.argsort(similarity_matrix[doc_id])
+    for ix in similar_ix:
+        if ix==doc_id:
+            continue
+        print('\n')
+        print (f'Document: {documents_df.iloc[ix]["documents"]}')
+        print (f'{matrix} : {similarity_matrix[doc_id][ix]}')
+'''
+    Cria um one hot encoding dos documentos
+'''
+tagged_data = [TaggedDocument(words=words, tags=[i]) for i, words in enumerate(result)]
+model_d2v = Doc2Vec(vector_size=100,alpha=0.025, min_count=1)
+model_d2v.build_vocab(tagged_data)
+
+
 #%%
-keywordfinderspanish = kf.KeywordFinder(
-                long_description=longa,
-                strategy=st.Spanish()
-)
-keywordfinderspanish.get_head_tail()
-keywordfinderspanish.get_short_tail()
-keywordfinderspanish.get_long_tail()
+for epoch in range(100):
+    model_d2v.train(tagged_data,
+                total_examples=model_d2v.corpus_count,
+                epochs=model_d2v.epochs)
+    
+document_embeddings=np.zeros((documents_df.shape[0],100))
+
+for i in range(len(document_embeddings)):
+    document_embeddings[i]=model_d2v.docvecs[i]
+    
+    
+pairwise_similarities=cosine_similarity(document_embeddings)
+pairwise_differences=euclidean_distances(document_embeddings)
+
+most_similar(0,pairwise_similarities,'Cosine Similarity')
+most_similar(0,pairwise_differences,'Euclidean Distance')
 #%%
