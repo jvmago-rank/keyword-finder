@@ -1,6 +1,5 @@
 #%%
 import os
-import sys
 from google_play_scraper import app
 import pandas as pd
 import re
@@ -8,7 +7,7 @@ import re
 os.chdir("../../")
 from utils import text_preprocessing as tp
 #%%
-df = pd.read_excel('Implementação - Planilhas Automatizadas V22 - Mobile Intelligence.xlsx',header=1)
+df = pd.read_excel('utils/model_train/Implementação - Planilhas Automatizadas V22 - Mobile Intelligence.xlsx',header=1)
 #%%
 df = df.replace('pr-BR','pt-BR')
 df = df[df['Idioma']=='pt-BR']
@@ -44,12 +43,10 @@ df_texts = df_texts[~df_texts['Description'].duplicated()]
 df_texts['Description'] = df_texts['Description'].apply(lambda x: re.sub(r'<.*?>', '', x))
 df_texts['Description'] = df_texts['Description'].apply(lambda x: re.sub(r'\r', '', x))
 df_texts['Description'] = df_texts['Description'].apply(lambda x: re.sub(r'\n', '', x))
-#%% Save
-df_texts.to_csv('utils/train_data/df_train.csv')
-#%%Load
-df_texts = pd.read_csv('utils/train_data/df_train.csv')
 # %% Preprocessing
 preprocess = tp.Preprocessing(df_texts['Description'].values)
 result = preprocess.apply_preprocess_pipeline()
 df_texts['Description'] = result
-# %%
+#%% Save
+df_texts.to_csv('utils/model_train/df_train.csv')
+#%%
