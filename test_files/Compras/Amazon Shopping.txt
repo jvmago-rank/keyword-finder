@@ -1,0 +1,32 @@
+Busque produtos, compare preços, leia avaliações e compre onde e quando quiser com o app da Amazon.
+
+Baixe o app e descubra descontos exclusivos e ofertas antecipadas. Acompanhe seus pedidos e receba notificações sobre a entrega.
+
+Frete GRÁTIS para membros Prime
+Assine o Amazon Prime e aproveite frete GRÁTIS sem valor mínimo de compra em produtos com o selo Prime. Com a sua assinatura Prime, você tem frete GRÁTIS rápido, ilimitado e para todo o Brasil. Procure pelo selo Prime nos produtos para aproveitar esse benefício. 
+
+Fique por dentro das ofertas 
+Baixe o app e fique por dentro das novas ofertas. Você encontra novidades em promoções todos os dias no app da Amazon. Veja também ofertas personalizadas para você. 
+Não perca nenhuma oferta: ative os alertas no app e receba notificações sobre ofertas em seu smartphone.
+
+Confira promoções em diversas categorias de produtos
+Baixe agora o aplicativo e encontre promoções em diversas categorias: Livros, Eletrônicos, Computadores e Informática, Casa, Jardim e Limpeza, Cozinha, Celulares e Comunicação, Beleza e Cuidados Pessoais, Cozinha, Brinquedos e Jogos, Produtos para Bebês, Esportes e Lazer, Ferramentas e Construção, Video Games, Games e Consoles, Papelaria e Escritório, Pet Shop, Roupas, Calçados e Acessórios, Alimentos e Bebidas, Automotivo, além de dispositivos Amazon como E-readers Kindle, Fire TV e dispositivos Echo com Alexa. 
+
+Motivos para usar o app da Amazon:
+- Compare preços, avalie produtos e faça a melhor compra online
+Compare preços e verifique a disponibilidade de produtos com o aplicativo da Amazon. Confira detalhes dos produtos e avaliações de outros clientes antes de comprar online. Com o app, você acompanha atualizações de forma fácil e recebe notificações sobre a entrega dos seus pedidos. 
+
+- Faça suas compras com rapidez e praticidade
+Seja para encontrar o presente ideal ou fazer compras para a casa, o aplicativo da Amazon facilita como você faz compras online. Encontre facilmente grande variedade de produtos em diversas categorias.
+Faça login com sua conta da Amazon para ter a experiência de compra online mais rápida e fácil. Acesse seu carrinho de compras, edite suas preferências de pagamento e veja as opções de envio.
+
+- Tenha segurança em suas compras online 
+Todas as compras são feitas com segurança através dos servidores da Amazon, que protegem suas informações pessoais, seu método de pagamento e os detalhes sobre suas compras.
+
+Detalhes da Permissão
+O app Amazon Shopping precisa de acesso às seguintes funções para funcionar corretamente: 
+- Câmera: permite que o app da Amazon acesse a câmera do seu dispositivo. Você pode pesquisar por produtos apontando sua câmera para um produto ou código de barras. Utilize também a câmera para adicionar fotos às avaliações de produtos. 
+- Lanterna: permite que o app da Amazon ligue a lanterna para buscar produtos usando a câmera em ambientes com pouca luz.
+- Conta: permite compartilhar produtos da Amazon com seus amigos e família no Facebook ou em outras redes sociais.
+- Telefone: permite que o app da Amazon preencha previamente o número do Atendimento ao Cliente no teclado. 
+- Armazenamento: permite que o app da Amazon guarde suas preferências para que algumas funções possam carregar mais rapidamente.

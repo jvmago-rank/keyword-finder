@@ -6,36 +6,39 @@ import re
 #Padrão: trabalhar com o diretorio mais pai possível
 os.chdir("../../")
 from utils import text_preprocessing as tp
+import json
 #%%
 df = pd.read_excel('utils/model_train/Implementação - Planilhas Automatizadas V22 - Mobile Intelligence.xlsx',header=1)
+with open('utils/other_apps.json', encoding='utf-8') as fh:
+    other_apps = json.load(fh)
 #%%
 df = df.replace('pr-BR','pt-BR')
 df = df[df['Idioma']=='pt-BR']
 #%%
 df = df.loc[:,['Nome do APP','Idioma','App ID']]
+apps = list(df['App ID'].values)
+for key in other_apps.keys():
+    for appl in other_apps[key]:
+        apps.append(appl)
 #%%
-df_texts = pd.DataFrame(columns=['Nome do APP','Idioma','Description'])
-app_names = []
-app_languages = []
+df_texts = pd.DataFrame(columns=['App ID','Description'])
 app_texts = []
-for index, row in df.iterrows():
+app_apps_id = []
+for appl in apps:
     try:
         result = app(
-            row['App ID'],
+            appl,
             lang='pt',
             country='br'
         )
     except:
         continue
-    app_names.append(row['Nome do APP'])
-    app_languages.append(row['Idioma'])
     
     app_texts.append(result['description'])
+    app_apps_id.append(appl)
 
 
-
-df_texts['Nome do APP'] = app_names
-df_texts['Idioma'] = app_languages
+df_texts['App ID'] = app_apps_id
 df_texts['Description'] = app_texts
 # %% Removing descriptions duplicateds
 df_texts = df_texts[~df_texts['Description'].duplicated()]

@@ -53,7 +53,8 @@ document_embeddings=np.zeros((documents_df.shape[0],300))
 
 for i in range(len(document_embeddings)):
     document_embeddings[i]=model_d2v.docvecs[i]
-    
+
+#%%
     
 pairwise_similarities=cosine_similarity(document_embeddings)
 pairwise_differences=euclidean_distances(document_embeddings)
