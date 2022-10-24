@@ -11,7 +11,7 @@ if os.path.exists("test_files/resultados.txt"):
   os.remove("test_files/resultados.txt")
 
 sectors = os.listdir('test_files/')
-sectors.remove('get_description.py')
+sectors.remove('get_descriptions.py')
 model = Doc2Vec.load('models/doc2vec_v1')
 f = open('test_files/resultados.txt','a')
 for sector in sectors:
