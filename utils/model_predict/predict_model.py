@@ -1,4 +1,5 @@
 #%%
+from datetime import datetime
 import os
 os.chdir("../../")
 from utils import text_preprocessing as tp
@@ -7,28 +8,27 @@ from gensim.models.doc2vec import Doc2Vec
 import io
 from itertools import combinations
 # #%%
-if os.path.exists("test_files/resultados.txt"):
-  os.remove("test_files/resultados.txt")
 
 sectors = os.listdir('test_files/')
 sectors.remove('get_descriptions.py')
 model = Doc2Vec.load('models/doc2vec_v1')
-f = open('test_files/resultados.txt','a')
-for sector in sectors:
-    f.write(f"Setor de {sector.upper()}:\n")
-    files = os.listdir(f'test_files/{sector}/')
-    all_combinations = list(combinations(files,2))
-    for combination in all_combinations:
-        text1 = io.open(f'test_files/{sector}/{combination[0]}','r',encoding='utf-8').read()
-        text2 = io.open(f'test_files/{sector}/{combination[1]}','r',encoding='utf-8').read()
+now = datetime.now().strftime("%d-%m-%Y %Hi%Mi%S")
+with open(f'outputs/{now}.txt', 'w+', encoding='utf-8') as f:
+    for sector in sectors:
+        f.write(f"Setor de {sector.upper()}:\n")
+        files = os.listdir(f'test_files/{sector}/')
+        all_combinations = list(combinations(files,2))
+        for combination in all_combinations:
+            text1 = io.open(f'test_files/{sector}/{combination[0]}','r',encoding='utf-8').read()
+            text2 = io.open(f'test_files/{sector}/{combination[1]}','r',encoding='utf-8').read()
 
-        texts = []
-        texts.append(text1)
-        texts.append(text2)
-        texts_preprocessed = tp.Preprocessing(texts).apply_preprocess_pipeline()
-        similarity = model.similarity_unseen_docs(texts_preprocessed[0],texts_preprocessed[1])
-        f.write(f"      => Similaridade entre '{combination[0]}' e '{combination[1]}': {similarity*100}%\n")
-    f.write('\n')
+            texts = []
+            texts.append(text1)
+            texts.append(text2)
+            texts_preprocessed = tp.Preprocessing(texts).apply_preprocess_pipeline()
+            similarity = model.similarity_unseen_docs(texts_preprocessed[0],texts_preprocessed[1])
+            f.write(f"      => Similaridade entre '{combination[0]}' e '{combination[1]}': {similarity*100}%\n")
+        f.write('\n')
 
 f.close()
 
