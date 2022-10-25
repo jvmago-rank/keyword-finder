@@ -7,31 +7,36 @@ from utils import keyword_finder as kf
 from gensim.models.doc2vec import Doc2Vec
 import io
 from itertools import combinations
+import pandas as pd
+import numpy as np
 # #%%
-
+similarity_data = pd.DataFrame(columns=['Category', 'Text 1','Text 2', 'Cosine Similarity (%)'])
 sectors = os.listdir('test_files/')
 sectors.remove('get_descriptions.py')
 model = Doc2Vec.load('models/doc2vec_v1')
 now = datetime.now().strftime("%d-%m-%Y %Hi%Mi%S")
-with open(f'outputs/{now}.txt', 'w+', encoding='utf-8') as f:
-    for sector in sectors:
-        f.write(f"Setor de {sector.upper()}:\n")
-        files = os.listdir(f'test_files/{sector}/')
-        all_combinations = list(combinations(files,2))
-        for combination in all_combinations:
-            text1 = io.open(f'test_files/{sector}/{combination[0]}','r',encoding='utf-8').read()
-            text2 = io.open(f'test_files/{sector}/{combination[1]}','r',encoding='utf-8').read()
+#with open(f'outputs/{now}.txt', 'w+', encoding='utf-8') as f:
+for sector in sectors:
+    #f.write(f"Setor de {sector.upper()}:\n")
+    files = os.listdir(f'test_files/{sector}/')
+    all_combinations = list(combinations(files,2))
+    for combination in all_combinations:
+        text1 = io.open(f'test_files/{sector}/{combination[0]}','r',encoding='utf-8').read()
+        text2 = io.open(f'test_files/{sector}/{combination[1]}','r',encoding='utf-8').read()
 
-            texts = []
-            texts.append(text1)
-            texts.append(text2)
-            texts_preprocessed = tp.Preprocessing(texts).apply_preprocess_pipeline()
-            similarity = model.similarity_unseen_docs(texts_preprocessed[0],texts_preprocessed[1])
-            f.write(f"      => Similaridade entre '{combination[0]}' e '{combination[1]}': {similarity*100}%\n")
-        f.write('\n')
+        texts = []
+        texts.append(text1)
+        texts.append(text2)
+        texts_preprocessed = tp.Preprocessing(texts).apply_preprocess_pipeline()
+        similarity = model.similarity_unseen_docs(texts_preprocessed[0],texts_preprocessed[1])
+        new_row = np.array([sector,combination[0],combination[1],float(similarity)])
+        similarity_data.loc[len(similarity_data)] = new_row
+        #f.write(f"      => Similaridade entre '{combination[0]}' e '{combination[1]}': {similarity*100}%\n")
+    #f.write('\n')
 
-f.close()
-
+#f.close()
+similarity_data.to_excel(f'outputs/{now}.xlsx',sheet_name='Similaridade')
+similarity_data['Cosine Similarity (%)'] = similarity_data['Cosine Similarity (%)'].astype(float)
 #%% Keyword Finder
 kf1 = kf.KeywordFinder(text1)
 kf2 = kf.KeywordFinder(text2)

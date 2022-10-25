@@ -15,7 +15,7 @@ data = pd.read_csv('utils/model_train/df_train.csv', index_col=0)
 #data = data.append(dados,ignore_index=True)
 #%%
 tagged_data = [TaggedDocument(words=words, tags=[i]) for i, words in enumerate(data['Description'])]
-model = Doc2Vec(vector_size=300,alpha=0.025, min_count=1, dm=1)
+model = Doc2Vec(vector_size=300,alpha=0.025, min_count=2, dm=1, window=6, epochs=500)
 model.build_vocab(tagged_data)
 model.train(tagged_data, total_examples=model.corpus_count, epochs=500)
 model.save('models/doc2vec_v1')
