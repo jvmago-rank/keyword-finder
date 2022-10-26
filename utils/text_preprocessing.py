@@ -64,8 +64,13 @@ class Preprocessing():
             stopwords = all_strategies[language].stopwords()
             self.texts[i] = [word for word in self.texts[i].split() if word not in stopwords]
 
+    def remove_numbers(self):
+        for i, text in enumerate(self.texts):
+            self.texts[i] = ''.join([i for i in text if not i.isdigit()])
+
     def apply_preprocess_pipeline(self):
         self.remove_emojis()
+        self.remove_numbers()
         self.remove_punctuation()
         self.to_lower_texts()
         self.identify_languages()

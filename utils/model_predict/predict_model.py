@@ -41,15 +41,15 @@ bests = similarity_data[similarity_data['Cosine Similarity (%)']>0.8]
 #%%
 sector = "Compras"
 name1 = "AliExpress.txt"
-name2 = "eBay Poupe e compre.txt"
+name2 = "Extra Loja Online e Ofertas.txt"
 text1 = io.open(f'test_files/{sector}/{name1}','r',encoding='utf-8').read()
 text2 = io.open(f'test_files/{sector}/{name2}','r',encoding='utf-8').read()
 texts = []
 texts.append(text1)
 texts.append(text2)
 texts_preprocessed = tp.Preprocessing(texts).apply_preprocess_pipeline()
-text1 = [word for word in texts_preprocessed[0] if texts_preprocessed[0].count(word)>=2]
-text2 = [word for word in texts_preprocessed[1] if texts_preprocessed[1].count(word)>=2]
+text1 = [word for word in texts_preprocessed[0] if texts_preprocessed[0].count(word)>=1]
+text2 = [word for word in texts_preprocessed[1] if texts_preprocessed[1].count(word)>=1]
 commom = []
 quantity = 0
 for word in text1:
