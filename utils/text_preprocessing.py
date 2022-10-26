@@ -43,6 +43,7 @@ class Preprocessing():
             u"\u231a"
             u"\ufe0f"  # dingbats
             u"\u3030"
+            u"\u2022"
                         "]+", re.UNICODE)
         
         for i,text in enumerate(self.texts):

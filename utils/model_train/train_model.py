@@ -8,16 +8,24 @@ os.chdir("../../")
 from utils import text_preprocessing as tp
 #%%
 data = pd.read_csv('utils/model_train/df_train.csv', index_col=0)
-#dados1 = np.array(['Texto 1','pt-BR',text1])
-#dados2 = np.array(['Texto 2','pt-BR',text2])
-#dados = pd.DataFrame(columns=['Nome do APP','Idioma','Description'], data=[dados1,dados2])
-
-#data = data.append(dados,ignore_index=True)
 #%%
 tagged_data = [TaggedDocument(words=words, tags=[i]) for i, words in enumerate(data['Description'])]
-model = Doc2Vec(vector_size=300,alpha=0.025, min_count=2, dm=1, window=6, epochs=500)
+
+instanciate_params = {
+    'min_count': 3, # Ignores all words with total frequency lower than this.
+    'window': 4, # The maximum distance between the current and predicted word within a sentence.
+    'dm': 1, #Defines the training algorithm. If dm=1, ‘distributed memory’ (PV-DM) is used. Otherwise, distributed bag of words (PV-DBOW) is employed.
+
+}
+model = Doc2Vec(**instanciate_params)
+
 model.build_vocab(tagged_data)
-model.train(tagged_data, total_examples=model.corpus_count, epochs=500)
+train_params = {
+    'corpus_iterable': tagged_data,
+    'total_examples' : model.corpus_count,
+    'epochs': 500
+}
+model.train(**train_params)
 model.save('models/doc2vec_v1')
 # similar_doc = model.docvecs.most_similar(101)
 # print(similar_doc[0])

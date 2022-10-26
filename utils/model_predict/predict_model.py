@@ -9,7 +9,7 @@ import io
 from itertools import combinations
 import pandas as pd
 import numpy as np
-# #%%
+#%%
 similarity_data = pd.DataFrame(columns=['Category', 'Text 1','Text 2', 'Cosine Similarity (%)'])
 sectors = os.listdir('test_files/')
 sectors.remove('get_descriptions.py')
@@ -28,7 +28,7 @@ for sector in sectors:
         texts.append(text1)
         texts.append(text2)
         texts_preprocessed = tp.Preprocessing(texts).apply_preprocess_pipeline()
-        similarity = model.similarity_unseen_docs(texts_preprocessed[0],texts_preprocessed[1])
+        similarity = model.similarity_unseen_docs(texts_preprocessed[0],texts_preprocessed[1],epochs=20)
         new_row = np.array([sector,combination[0],combination[1],float(similarity)])
         similarity_data.loc[len(similarity_data)] = new_row
         #f.write(f"      => Similaridade entre '{combination[0]}' e '{combination[1]}': {similarity*100}%\n")
@@ -37,6 +37,26 @@ for sector in sectors:
 #f.close()
 similarity_data.to_excel(f'outputs/{now}.xlsx',sheet_name='Similaridade')
 similarity_data['Cosine Similarity (%)'] = similarity_data['Cosine Similarity (%)'].astype(float)
+bests = similarity_data[similarity_data['Cosine Similarity (%)']>0.8]
+#%%
+sector = "Compras"
+name1 = "AliExpress.txt"
+name2 = "eBay Poupe e compre.txt"
+text1 = io.open(f'test_files/{sector}/{name1}','r',encoding='utf-8').read()
+text2 = io.open(f'test_files/{sector}/{name2}','r',encoding='utf-8').read()
+texts = []
+texts.append(text1)
+texts.append(text2)
+texts_preprocessed = tp.Preprocessing(texts).apply_preprocess_pipeline()
+text1 = [word for word in texts_preprocessed[0] if texts_preprocessed[0].count(word)>=2]
+text2 = [word for word in texts_preprocessed[1] if texts_preprocessed[1].count(word)>=2]
+commom = []
+quantity = 0
+for word in text1:
+    if word in text2:
+        commom.append(word)
+        quantity += 1
+print(f"Percentual de palavras comuns: {quantity/len(text1)*100}%")
 #%% Keyword Finder
 kf1 = kf.KeywordFinder(text1)
 kf2 = kf.KeywordFinder(text2)
