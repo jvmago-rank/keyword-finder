@@ -92,6 +92,6 @@ elif selected == "Text Similarity":
 		if text1!="" and text2!="":
 			similarity = pm.ModelPredict(text1,text2).predict_similarity()
 			similarity = float(format(similarity,'.2f'))
-			st.markdown(f"Similaridade entre os textos: {similarity*100}")
+			st.markdown(f"Similaridade entre os textos: {similarity*100}%")
 		else:
 			st.markdown("Insert two valid texts, please!")
