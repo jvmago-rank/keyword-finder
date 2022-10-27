@@ -1,6 +1,7 @@
 #%%
-import os
-os.chdir("../../")
+
+# import os
+# os.chdir("../../")
 from utils import text_preprocessing as tp
 from gensim.models.doc2vec import Doc2Vec
 

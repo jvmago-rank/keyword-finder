@@ -2,5 +2,6 @@ google-play-scraper
 scikit-learn
 pandas
 streamlit
+streamlit-option-menu
 nltk
 jellyfish
