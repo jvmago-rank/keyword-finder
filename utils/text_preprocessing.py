@@ -20,8 +20,9 @@ class Preprocessing():
         
     
     def remove_punctuation(self):
-        for i, text in enumerate(self.texts):
-            self.texts[i] = text.translate(str.maketrans('', '', string.punctuation))
+        for i, text in enumerate(self.texts):            
+            self.texts[i] = text.translate(str.maketrans(' ', ' ', string.punctuation))
+            
     
     def remove_emojis(self):
         emoj = re.compile("["
@@ -47,7 +48,7 @@ class Preprocessing():
                         "]+", re.UNICODE)
         
         for i,text in enumerate(self.texts):
-            self.texts[i] = re.sub(emoj, "",text)
+            self.texts[i] = re.sub(emoj, " ",text)
 
 
     def tokenize_texts(self):
@@ -68,10 +69,27 @@ class Preprocessing():
         for i, text in enumerate(self.texts):
             self.texts[i] = ''.join([i for i in text if not i.isdigit()])
 
+    def remove_new_lines(self):
+        for i, text in enumerate(self.texts):
+            self.texts[i] = re.sub('\n', ' ', text)
+    
+    def remove_html_flags(self):
+        for i, text in enumerate(self.texts):
+            self.texts[i] = re.sub(r'<.*?>', '', text)
+    
+    def remove_spaces(self):
+        for i, text in enumerate(self.texts):
+            self.texts[i] = text.strip()
+    
+    
+
     def apply_preprocess_pipeline(self):
         self.remove_emojis()
         self.remove_numbers()
         self.remove_punctuation()
+        self.remove_html_flags()
+        self.remove_new_lines()
+        self.remove_spaces()
         self.to_lower_texts()
         self.identify_languages()
         self.remove_stopwords()

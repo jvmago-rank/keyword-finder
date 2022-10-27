@@ -10,11 +10,16 @@ from sklearn.metrics.pairwise import euclidean_distances
 from scipy import spatial
 import pandas as pd
 #%%
-text1 = "Amigo é coisa pra se guardar"
-text2 = 'Amigo se guarda'
+text1 = """
+O OurTime é um site de relacionamento para pessoas maduras que estão à procura de um recomeço!
+
+Quando nós chegamos aos 50 anos, já vivemos muito e aprendemos bastante com relacionamentos passados de amor ou de amizade. Aprendemos o que é certo para nós e temos orgulho de nossos feitos. Agora é o momento de compartilhar a sua vida com alguém especial e esse alguém pode estar aqui!
+
+Agora você pode conversar DE GRAÇA por mensagem e por vídeo com todos os seus Pares!
+
+Aqui você tem a experiência completa! Crie o seu perfil e curta quem te chamar atenção. Quando você curtir alguém e essa pessoa te curtir de volta, vocês formam um Par. E depois que Deu Par, a conversa é GRÁTIS!"""
 texts = []
 texts.append(text1)
-texts.append(text2)
 #%%
 teste = pp.Preprocessing(texts.copy())
 result = teste.apply_preprocess_pipeline()

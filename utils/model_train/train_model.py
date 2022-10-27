@@ -2,8 +2,6 @@
 import os
 from gensim.models.doc2vec import Doc2Vec, TaggedDocument
 import pandas as pd
-
-
 os.chdir("../../")
 from utils import text_preprocessing as tp
 #%%
@@ -14,7 +12,7 @@ tagged_data = [TaggedDocument(words=words, tags=[i]) for i, words in enumerate(d
 
 instanciate_params = {
     'min_count': 2, # Ignores all words with total frequency lower than this.
-    'window': 2, # The maximum distance between the current and predicted word within a sentence.
+    'window': 3, # The maximum distance between the current and predicted word within a sentence.
     'dm': 1, #Defines the training algorithm. If dm=1, ‘distributed memory’ (PV-DM) is used. Otherwise, distributed bag of words (PV-DBOW) is employed.
     'vector_size': 200
 }
@@ -29,9 +27,11 @@ train_params = {
 model.train(**train_params)
 model.save('models/doc2vec_v1')
 #%%
-to_compare = 0
-similar_doc = model.docvecs.most_similar(to_compare)
-print(similar_doc)
-# lista = [to_compare,similar_doc[0][0]]
-    # result = data[data.index.isin(lista)]
+for i in range(len(data)):
+    print(f'Text index: {i}')
+    to_compare = i
+    similar_doc = model.docvecs.most_similar(to_compare)
+    print(f"    => {similar_doc[0]}")
+    print('\n')
+
 #%%
