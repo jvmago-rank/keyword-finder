@@ -11,7 +11,7 @@ from streamlit_option_menu import option_menu
 
 with st.sidebar:
 	selected = option_menu("Main Menu", ["Keyword Finder", 'Text Similarity'], 
-        icons=['search', 'card-text'], menu_icon="cast", default_index=0)
+        icons=['search', 'body-text'], menu_icon="cast", default_index=0)
 
 
 if selected == 'Keyword Finder':
@@ -86,12 +86,26 @@ if selected == 'Keyword Finder':
 
 
 elif selected == "Text Similarity":
+	img2 = Image.open('txtcomp_logo.png')
+	st.image(img2)
 	text1 = st.text_area('Primeiro texto:', value="")
 	text2 = st.text_area('Segundo texto:', value="")
 	if st.button('Check Similarity'):
 		if text1!="" and text2!="":
 			similarity = pm.ModelPredict(text1,text2).predict_similarity()
 			similarity = float(format(similarity,'.2f'))
+			if similarity < 0:
+				similarity = 0
 			st.markdown(f"Similaridade entre os textos: {similarity*100}%")
+			st.markdown(
+			"""
+			<style>
+				.stProgress > div > div > div > div {
+					background-image: linear-gradient(to right, #99ff99 , #00ccff);
+				}
+			</style>""",
+			unsafe_allow_html=True,
+		)
+			bar = st.progress(similarity)
 		else:
 			st.markdown("Insert two valid texts, please!")
