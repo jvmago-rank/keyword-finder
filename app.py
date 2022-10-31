@@ -89,7 +89,7 @@ if selected == 'Keyword Finder':
 elif selected == "Text Similarity":
 	img2 = Image.open('txtcomp_logo.png')
 	st.image(img2)
-	st.write("Saiba mais sobre o Text Similarity [clicando aqui].(https://docs.google.com/document/d/1nnrFk0gP65r6vsufawPMo557fIQOw5DZFxV7b1MwKek/edit?usp=sharing)")
+	st.write("Saiba mais sobre o Text Similarity [clicando aqui](https://docs.google.com/document/d/1nnrFk0gP65r6vsufawPMo557fIQOw5DZFxV7b1MwKek/edit?usp=sharing).")
 	text1 = st.text_area('Primeiro texto:', value="")
 	text2 = st.text_area('Segundo texto:', value="")
 	if st.button('Check Similarity'):
