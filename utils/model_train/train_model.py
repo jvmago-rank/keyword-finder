@@ -14,7 +14,7 @@ data.index = [x for x in range (len(data))]
 tagged_data = [TaggedDocument(words=words, tags=[i]) for i, words in enumerate(data['Description'])]
 #%%
 instanciate_params = {
-    'min_count': 1, # Ignores all words with total frequency lower than this.
+    'min_count': 2, # Ignores all words with total frequency lower than this.
     'window': 5, # The maximum distance between the current and predicted word within a sentence.
     'dm': 1, #Defines the training algorithm. If dm=1, ‘distributed memory’ (PV-DM) is used. Otherwise, distributed bag of words (PV-DBOW) is employed.
     'vector_size': 200
@@ -34,13 +34,14 @@ for i in range(len(data)):
     print(f'Text index: {i}')
     to_compare = i
     similar_doc = model.dv.most_similar(to_compare)
-    print(f"    => {similar_doc[0]}")
+    for j in range(2):
+        print(f"    => {similar_doc[j]}")
     print('\n')
 
 
 
 
 #%%
-model.dv.most_similar(116) #Inter
+model.dv.most_similar(114) #Inter
 
 # %%
