@@ -32,3 +32,7 @@ for combination in all_combinations:
 similarity_data.to_excel(f'outputs/{now}.xlsx',sheet_name='Similaridade')
 bests = similarity_data[similarity_data['Cosine Similarity (%)']>0.6]
 #%%
+sim = pd.read_excel(f'outputs/{"31-10-2022 10i45i43"}.xlsx',sheet_name='Similaridade',index_col=0)
+worsts = sim[sim['Cosine Similarity (%)']<0.1]
+bests = sim[sim['Cosine Similarity (%)']>0.6]
+# %%
