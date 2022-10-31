@@ -3,6 +3,7 @@ scikit-learn
 pandas
 streamlit
 streamlit-option-menu
+streamlit-card
 nltk
 jellyfish
 gensim

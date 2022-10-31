@@ -1,4 +1,5 @@
 import streamlit as st
+from streamlit_card import card
 import pandas as pd
 from PIL import Image
 from google_play_scraper import app
@@ -94,9 +95,7 @@ elif selected == "Text Similarity":
 		if text1!="" and text2!="":
 			similarity = pm.ModelPredict(text1,text2).predict_similarity()
 			similarity = float(format(similarity,'.2f'))
-			if similarity < 0:
-				similarity = 0
-			st.markdown(f"Similaridade entre os textos: {similarity*100}%")
+			st.markdown(f"Similaridade aproximada entre os textos: {similarity*100}%")
 			st.markdown(
 			"""
 			<style>
@@ -106,6 +105,7 @@ elif selected == "Text Similarity":
 			</style>""",
 			unsafe_allow_html=True,
 		)
-			bar = st.progress(similarity)
+			#bar = st.progress(similarity)
+			#card(title='Similarity between texts', text=similarity)
 		else:
 			st.markdown("Insert two valid texts, please!")

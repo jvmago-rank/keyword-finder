@@ -16,5 +16,6 @@ class ModelPredict():
         texts.append(self.text1)
         texts.append(self.text2)
         texts_preprocessed = tp.Preprocessing(texts).apply_preprocess_pipeline()
-        similarity = self.model.similarity_unseen_docs(texts_preprocessed[0],texts_preprocessed[1],epochs=20)
+        similarity = self.model.similarity_unseen_docs(texts_preprocessed[0],texts_preprocessed[1])
+       
         return similarity
