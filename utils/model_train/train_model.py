@@ -14,7 +14,7 @@ data.index = [x for x in range (len(data))]
 tagged_data = [TaggedDocument(words=words, tags=[i]) for i, words in enumerate(data['Description'])]
 #%%
 instanciate_params = {
-    'min_count': 2, # Ignores all words with total frequency lower than this.
+    'min_count': 1, # Ignores all words with total frequency lower than this.
     'window': 5, # The maximum distance between the current and predicted word within a sentence.
     'dm': 1, #Defines the training algorithm. If dm=1, ‘distributed memory’ (PV-DM) is used. Otherwise, distributed bag of words (PV-DBOW) is employed.
     'vector_size': 200

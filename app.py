@@ -105,7 +105,7 @@ elif selected == "Text Similarity":
 			</style>""",
 			unsafe_allow_html=True,
 		)
-			#bar = st.progress(similarity)
+			bar = st.progress(abs(similarity))
 			#card(title='Similarity between texts', text=similarity)
 		else:
 			st.markdown("Insert two valid texts, please!")

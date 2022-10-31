@@ -9,13 +9,12 @@ import string
 os.chdir("../")
 import json
 #%%
-with open('utils/other_apps.json', encoding='utf-8') as fh:
+with open('utils/other_apps_for_train.json', encoding='utf-8') as fh:
     apps = json.load(fh)
 #%%
 for category in apps.keys():
     while os.path.exists(f'test_files/{category}'):
         shutil.rmtree(f'test_files/{category}')
-    os.makedirs(f'test_files/{category}/')
     
     for appl in apps[category]:
         try:
@@ -25,7 +24,7 @@ for category in apps.keys():
                 country='br'
             )
             title = str(result['title']).translate(str.maketrans('', '', string.punctuation))
-            dirr = f"test_files/{category}/{title}"
+            dirr = f"test_files/{title}"
             
             with open(f"{dirr}.txt", "w+", encoding="UTF-8") as f:
                 f.write(result['description'])

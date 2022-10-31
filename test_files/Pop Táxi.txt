@@ -1,0 +1,8 @@
+A Pop Táxi é uma aplicação simples e fácil de usar que permite ao usuário solicitar e agendar corridas.
+
+Aceitamos varias formas de pagamento.
+Chame um táxi e acompanhe o trajeto até você em tempo real.
+Compartilhe seu percurso com a família e amigos.
+Táxi 24 horas na sua mão. Pedir um táxi nunca foi tão fácil!
+Os nossos motoristas estão prontos para te levar, com conforto e segurança.
+Aproveite muito! O valor é descontado no final da sua corrida.
