@@ -8,7 +8,9 @@ from utils import list_strategies as ls
 from utils import auto_match_language as aml
 from utils.model_predict import predict_model as pm
 from streamlit_option_menu import option_menu
+rank = Image.open('rank_logo.png')
 
+st.set_page_config(page_title='Keyword Finder',page_icon=rank)
 
 with st.sidebar:
 	selected = option_menu("Main Menu", ["Keyword Finder", 'Text Similarity'], 
