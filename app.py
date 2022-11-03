@@ -104,7 +104,7 @@ elif selected == "Text Similarity":
 			"""
 			<style>
 				.stProgress > div > div > div > div {
-					background-image: linear-gradient(to right, #99ff99 , #00ccff);
+					background-image: linear-gradient(to right, #aeabff , #0800ff);
 				}
 			</style>""",
 			unsafe_allow_html=True,
