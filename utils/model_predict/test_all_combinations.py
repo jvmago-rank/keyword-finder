@@ -24,13 +24,23 @@ for combination in all_combinations:
     texts.append(text1)
     texts.append(text2)
     texts_preprocessed = tp.Preprocessing(texts).apply_preprocess_pipeline()
-    similarity = model.similarity_unseen_docs(texts_preprocessed[0],texts_preprocessed[1])  
+    similarity = model.similarity_unseen_docs(texts_preprocessed[0],texts_preprocessed[1])
+    if (similarity < 0):
+        similarity = 0.0  
     new_row = np.array([combination[0],combination[1],float(similarity)])
     similarity_data.loc[len(similarity_data)] = new_row
 
 similarity_data.to_excel(f'outputs/{now}.xlsx',sheet_name='Similaridade')
 #%%
-sim = pd.read_excel(f'outputs/{"31-10-2022 13i38i03"}.xlsx',sheet_name='Similaridade',index_col=0)
-worsts = sim[sim['Cosine Similarity']<=0.0]
+sim = pd.read_excel(f'outputs/{"03-11-2022 11i50i34"}.xlsx',sheet_name='Similaridade',index_col=0)
+worsts = sim[sim['Cosine Similarity']<0.1]
+worsts = worsts.sort_values(by='Cosine Similarity', ascending=False)
 bests = sim[sim['Cosine Similarity']>0.6]
+bests = bests.sort_values(by='Cosine Similarity', ascending=False)
+# %%
+fig = px.box(sim,y='Cosine Similarity')
+fig.update_layout(title='<b>Boxplot dos dados de similaridade entre diferentes apps</b>', title_x=0.5,
+                
+                        plot_bgcolor='rgb(255,255,255)')
+fig.show()
 # %%
