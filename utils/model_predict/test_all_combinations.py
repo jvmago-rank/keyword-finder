@@ -27,11 +27,10 @@ for combination in all_combinations:
     similarity = model.similarity_unseen_docs(texts_preprocessed[0],texts_preprocessed[1])  
     new_row = np.array([combination[0],combination[1],float(similarity)])
     similarity_data.loc[len(similarity_data)] = new_row
-    #f.write(f"      => Similaridade entre '{combination[0]}' e '{combination[1]}': {similarity*100}%\n")
 
 similarity_data.to_excel(f'outputs/{now}.xlsx',sheet_name='Similaridade')
 #%%
 sim = pd.read_excel(f'outputs/{"31-10-2022 13i38i03"}.xlsx',sheet_name='Similaridade',index_col=0)
-worsts = sim[sim['Cosine Similarity']<0.1]
+worsts = sim[sim['Cosine Similarity']<=0.0]
 bests = sim[sim['Cosine Similarity']>0.6]
 # %%
